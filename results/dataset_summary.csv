@@ -1,0 +1,11 @@
+,Value
+Dataset,Chest X-Ray Pneumonia Detection
+Source,Kaggle - Paul Mooney
+Total Images,5856
+Training Images,5216
+Validation Images,16
+Test Images,624
+Classes,2
+Average Width,1302
+Average Height,957
+Imbalance Ratio (train),2.89:1

@@ -1,0 +1,8 @@
+Metric,Baseline,Improved V3
+Sensitivity (Recall),1.0000 (100.00%),0.9974 (99.74%)
+Specificity,0.3120 (31.20%),0.3333 (33.33%)
+Positive Predictive Value (Precision),0.7078 (70.78%),0.7138 (71.38%)
+Negative Predictive Value,1.0000 (100.00%),0.9873 (98.73%)
+False Positive Rate,0.6880 (68.80%),0.6667 (66.67%)
+False Negative Rate,0.0000 (0.00%),0.0026 (0.26%)
+Overall Accuracy,0.7532 (75.32%),0.7484 (74.84%)
