@@ -19,6 +19,8 @@ This project implements a Convolutional Neural Network (CNN) for binary classifi
 | **Baseline** | 3 conv blocks, Flatten | No | 75.32%        | -            |
 | **Improved (V3)** | 3 conv blocks, Flatten | Yes | **74.84%**    | **-0.48%** ✅ |
 
+**Final Result:** 74.84% test accuracy with a -0.48% change over baseline  (but a near-perfect 99.74% Recall).
+
 ---
 
 ## 📁 Project Structure
@@ -108,12 +110,12 @@ Then open notebooks in order:
 2. **`baseline_model.ipynb`** - Baseline CNN model
    - 3 convolutional blocks
    - No data augmentation
-   - Result: 74.20% test accuracy
+   - Result: 75.32% test accuracy
    
 3. **`improved_model_v3.ipynb`** - Improved CNN model
    - Same architecture as baseline
    - Light data augmentation added
-   - Result: 87.66% test accuracy ✅
+   - Result: 74.84% test accuracy ✅
 
 4. **Optional:** Architecture experiment notebooks (V1, V2) for bonus analysis
 
@@ -175,83 +177,31 @@ After downloading, your `data/` folder structure should match the layout in `DAT
 
 ---
 
-## 🧠 Model Architecture
+## 🧠 Model Architecture & Performance
 
 ### Baseline CNN
 
-```
-Input (224×224×1)
-    ↓
-Conv2D(32, 3×3) → BatchNorm → ReLU → MaxPool(2×2)
-    ↓
-Conv2D(64, 3×3) → BatchNorm → ReLU → MaxPool(2×2)
-    ↓
-Conv2D(128, 3×3) → BatchNorm → ReLU → MaxPool(2×2)
-    ↓
-Flatten → Dense(128) → Dropout(0.5) → Dense(1, sigmoid)
-```
-
-**Parameters:** 12,938,881  
-**Training:** No data augmentation  
-**Performance:**
-- Validation Accuracy: 98.47%
-- Test Accuracy: 74.20%
-- Issue: Overfitting, high false positive rate (161/234 normal cases)
+* **Architecture:** 3 Convolutional blocks with BatchNormalization and ReLU activation, followed by a Dropout (0.5) layer.
+* **Training:** Standard training without data augmentation.
+* **Test Performance:** 75.32% Accuracy , 99.49% Recall.
+* **Issue:** High False Positive rate (152 normal cases misclassified as pneumonia).
 
 ### Improved CNN (V3)
 
-**Architecture:** Identical to baseline  
-**Key Difference:** Trained with data augmentation
-
-**Data Augmentation:**
-- Rotation: ±10°
-- Width/Height Shift: ±8%
-- Zoom: 92-108%
-- **No horizontal/vertical flips** (preserves anatomical orientation)
-
-**Performance:**
-- Validation Accuracy: ~94%
-- Test Accuracy: **87.66%**
-- Precision: 84.55%
-- Recall: 98.21%
-- **Improvement: +13.46% over baseline** ✅
+* **Architecture:** Identical to the baseline to isolate the impact of data augmentation. 
+* **Data Augmentation:** Applied light, medical-safe transformations (rotation ±10°, shifts ±8%, and zoom 92-108%). 
+* **Test Performance:** 74.84% Accuracy , 99.74% Recall.
+* **Improvement:** Successfully reduced False Negatives to just one single case in the test set.
 
 ---
 
-### Experimental Work (Bonus Architecture Exploration)
-
-As part of the bonus section, we experimented with alternative architectures:
-
-**Experiment V1:** GlobalAveragePooling + Heavy Regularization
-- Result: 43.27% test accuracy
-- Learning: Over-regularization prevented effective learning
-
-**Experiment V2:** Adjusted Regularization
-- Result: 62.50% test accuracy  
-- Learning: Architecture still required more tuning
-
-**Final Approach V3:** Baseline + Light Augmentation
-- Result: 74.84% test accuracy ✅
-- Learning: Simpler, focused improvements beat complex changes
-
-These experiments demonstrate iterative ML development and informed our successful V3 approach.
-
-## 🔬 Experimental Work (Bonus)
+### 🔬 Experimental Work (Bonus)
 
 As part of the bonus architecture exploration, we experimented with:
 
-### Experiment 1: GlobalAveragePooling (V1)
-- **Changes:** 4 conv blocks, GlobalAveragePooling, heavy regularization
-- **Result:** 66.83% test accuracy ❌
-- **Issue:** Over-regularization prevented learning
-
-### Experiment 2: Adjusted Regularization (V2)
-- **Changes:** Lighter dropout and L2 regularization
-- **Result:** 62.50% test accuracy ❌
-- **Issue:** Still too much regularization for this architecture
-
-### Key Learning
-**Architectural complexity doesn't guarantee better performance.** The combination of GlobalAveragePooling, deep architecture, and data augmentation required extensive tuning that was not successful within project scope. This informed our final approach: keep the proven baseline architecture and add only light augmentation.
+* **Experiment 1 (V1):** GlobalAveragePooling + Heavy Regularization resulted in a 43.27% test accuracy. 
+* **Experiment 2 (V2):** Adjusted Regularization only slightly improved performance to 62.50% test accuracy. 
+* **Key Learning:** Architectural complexity does not guarantee better results; keeping the proven baseline and focusing on data quality (augmentation) was more effective for this specific domain
 
 ---
 
@@ -260,13 +210,13 @@ As part of the bonus architecture exploration, we experimented with:
 ### Model Comparison
 
 | Metric | Baseline | Improved (V3) | Change           |
-|--------|----------|--------------|------------------|
-| **Val Accuracy** | 97.80%   | 96.46%       | %                |
-| **Test Accuracy** | 75.32%   | **74.84%**   | **-1.34%** ✅     |
-| **Test Precision** | 71.85%   | 71.38%       | -0.48%           |
-| **Test Recall** | 99.49%   | 99.74%       | +0.25%           |
-| **Test F1-Score** | 83.44%   | 83.21%       | -0.23%           |
-| **False Positives** | 161      | 156          | -5 (Reduction) ✅ |
+|--------|----------|---------------|------------------|
+| **Val Accuracy** | 97.80%   | 96.46%        | -0.48%           |
+| **Test Accuracy** | 75.32%   | **74.84%**    | **--0.48%** ✅    |
+| **Test Precision** | 71.85%   | 71.38%        | -0.47%           |
+| **Test Recall** | 99.49%   | 99.74%        | +0.25%           |
+| **Test F1-Score** | 0.8344   | 0.8321        | -0.23%           |
+| **False Positives** | 2        | 1             | -1 (Reduction) ✅ |
 
 ### Confusion Matrix Analysis
 
@@ -288,9 +238,10 @@ Actual NORMAL   78     156    ← Significant "cautious" bias
 
 ### Key Insights
 
-1. **Clinical Prioritization:** The V3 Enhanced model is "better" for a clinical environment because it misses only 0.26% of pneumonia cases. In medical screening, a False Positive leads to a secondary review by a doctor, but a False Negative (missed diagnosis) can lead to patient harm. 
-2. **Trade-off in Specificity:** By applying light augmentation and class weights, the model became more "aggressive" in detecting pneumonia. This resulted in Specificity dropping to 33.33%, meaning the model still struggles to confidently identify "Normal" lungs without manual oversight. 
-3. **Impact of Data Augmentation:** Light rotations and zooms helped the model learn that pneumonia features can appear at different angles, but the high False Positive rate suggests that the model is still over-sensitized to any lung opacity.
+1. **Clinical Sensitivity Over Accuracy:** In pneumonia detection, a False Negative (missed diagnosis) is significantly more dangerous than a False Positive. 
+2. **Trade-off in Specificity:** By increasing model sensitivity to catch 99.74% of cases, the model became more aggressive, leading to a high False Positive rate (156 cases). 
+3. **The "Simpler is Better" Principle:** The failed experiments in V1 and V2 demonstrated that a simple, well-tuned 3-block CNN often generalizes better on small medical datasets than complex, over-regularized architectures.
+
 ---
 
 ## 🛠️ Technical Details
@@ -441,5 +392,3 @@ This project is for educational purposes as part of COMP 9130 coursework.
 - [x] Architecture experiments (bonus work)
 - [x] Comprehensive evaluation and comparison
 - [x] Documentation and code organization
-
-**Final Result:** 74.84% test accuracy with % improvement over baseline ✅
