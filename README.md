@@ -392,3 +392,52 @@ This project is for educational purposes as part of COMP 9130 coursework.
 - [x] Architecture experiments (bonus work)
 - [x] Comprehensive evaluation and comparison
 - [x] Documentation and code organization
+
+## Team Contributions
+
+This project was a collaborative effort between two partners. Responsibilities were divided to ensure both technical implementation and comprehensive analysis were handled effectively.
+
+---
+
+### Binger Yu
+
+#### Data Preprocessing & Implementation
+- Developed the custom data loading pipeline  
+- Implemented image normalization  
+- Calculated class weights for imbalance handling
+
+#### Model Development
+- Built and trained the baseline CNN architecture from scratch to establish initial performance metrics
+
+#### Experimental Iteration
+- Conducted multiple architecture experiments:
+  - Improved V1 (GlobalAveragePooling)
+  - Improved V2 (Heavy Regularization)
+- Explored performance boundaries across designs
+
+#### Final Model Optimization
+- Developed and optimized the **Improved V3 model**
+- Implemented medical-safe data augmentation
+- Achieved near-perfect recall of **99.74%**
+
+#### Repository Management
+- Set up and maintained the GitHub repository  
+- Organized directory structure  
+- Managed `.gitignore` files  
+- Ensured reproducibility
+
+#### Notebook Documentation
+- Completed primary Jupyter notebooks:
+  - exploration
+  - baseline_model
+  - improved_model_v3_enhanced
+- Added detailed documentation and visualizations
+
+#### Report Infrastructure
+- Created the Overleaf project template to support collaborative report writing
+
+---
+
+### Savina Cai
+
+---
