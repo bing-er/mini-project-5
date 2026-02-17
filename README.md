@@ -440,4 +440,39 @@ This project was a collaborative effort between two partners. Responsibilities w
 
 ### Savina Cai
 
+#### Report Writing & Analysis
+- Authored the complete **LaTeX report** (12 pages, 6 sections) based on experimental results and notebook outputs
+- Wrote all report sections: Introduction, Methodology, Results, Discussion, Conclusion, and References
+
+#### Introduction & Background Research
+- Researched and wrote the clinical background on pneumonia detection and the role of deep learning in medical imaging
+- Summarized the dataset characteristics, class imbalance issues, and project objectives
+
+#### Methodology Documentation
+- Documented the full data preprocessing pipeline (grayscale conversion, resizing, normalization, stratified splitting)
+- Created detailed architecture tables for the baseline CNN (layer-by-layer parameter breakdown)
+- Described the V3 augmentation strategy and justified the choice to disable flips for anatomical plausibility
+- Summarized the V1 and V2 experimental failures and the lessons that informed the V3 approach
+
+#### Results Compilation & Presentation
+- Compiled and formatted all quantitative results into comparison tables (baseline vs. V3 across all metrics)
+- Analyzed confusion matrices and computed clinical metrics (sensitivity, specificity, PPV, NPV, FPR, FNR)
+- Documented the experimental architecture results (V1: 43.27%, V2: 62.50%) with context
+
+#### Discussion & Critical Analysis
+- Analyzed the clinical safety vs. raw accuracy trade-off and justified why V3 was selected despite lower accuracy
+- Discussed the impact of data augmentation on generalization and the overfitting gap
+- Provided critical analysis of the failed experiments (V1, V2) and the "simpler is better" principle for small medical datasets
+- Examined the high false positive rate and its implications for clinical deployment
+
+#### Conclusion & Future Work
+- Summarized key findings and contributions of the project
+- Proposed five directions for future work: transfer learning, larger datasets, threshold optimization, Grad-CAM visualization, and multi-class classification
+
+#### References & Citations
+- Curated 9 academic references including Kermany et al. (2018), CheXNet, and data augmentation surveys
+- Ensured proper citation formatting throughout the report
+
+
+
 ---
