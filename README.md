@@ -211,7 +211,7 @@ As part of the bonus architecture exploration, we experimented with:
 
 | Metric | Baseline | Improved (V3) | Change           |
 |--------|----------|---------------|------------------|
-| **Val Accuracy** | 97.80%   | 96.46%        | -0.48%           |
+| **Val Accuracy** | 97.80%   | 96.46%        | -1.34%           |
 | **Test Accuracy** | 75.32%   | **74.84%**    | **--0.48%** ✅    |
 | **Test Precision** | 71.85%   | 71.38%        | -0.47%           |
 | **Test Recall** | 99.49%   | 99.74%        | +0.25%           |
